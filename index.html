@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magical Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base & Typography */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f172a; 
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-magic {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Magical Blur Transitions */
+        .phase-container {
+            transition: opacity 1s ease, filter 1s ease;
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .fade-blur-out {
+            opacity: 0;
+            filter: blur(15px);
+            pointer-events: none;
+        }
+        .fade-blur-in {
+            opacity: 1;
+            filter: blur(0px);
+        }
+        
+        /* Utility */
+        .bg-overlay {
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(0.5px);
+            position: absolute;
+            inset: 0;
+        }
+        .bg-overlay2 {
+            background-color: rgba(187, 202, 239, 0.6);
+            backdrop-filter: blur(0.1px);
+            position: absolute;
+            inset: 0;
+        }
+        .section-bg {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        /* Crystal Glow Animation */
+        .crystal-glow {
+            animation: ethereal-pulse 3s infinite alternate;
+        }
+        @keyframes ethereal-pulse {
+            0% { filter: drop-shadow(0 0 10px rgba(191, 219, 254, 0.4)); transform: scale(1); }
+            100% { filter: drop-shadow(0 0 25px rgba(191, 219, 254, 0.9)); transform: scale(1.05); }
+        }
+
+        /* 3D Flip Countdown Animations */
+        .perspective-container {
+            perspective: 1000px;
+        }
+        @keyframes flip-down {
+            0% { transform: rotateX(90deg); opacity: 0.5; }
+            100% { transform: rotateX(0deg); opacity: 1; }
+        }
+        .animate-flip {
+            animation: flip-down 0.4s ease-out forwards;
+            transform-origin: bottom center;
+        }
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, -12px); }
+            100% { transform: translate(0, 0px); }
+        }
+        .logo-float {
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        /* --- Scroll Blur Animation --- */
+        .scroll-blur-element {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(20px);
+            transition: opacity 1.2s ease-out, filter 1.2s ease-out, transform 1.2s ease-out;
+            will-change: opacity, filter, transform;
+        }
+        .scroll-blur-element.scrolled-in {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="phase1" class="phase-container z-50 bg-slate-900" style="background-image: url(1.png); background-size: cover; background-position: center;">
+        <div class="bg-overlay"></div>
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group" onclick="goToPhase2()">
+            <img src="envelope.png" alt="Envelope" class="w-72 md:w-96 shadow-2xl rounded transition-transform duration-500 group-hover:scale-105">
+            <p class="mt-8 text-sm md:text-base tracking-[0.3em] uppercase opacity-80 animate-pulse">Click to view the invitation</p>
+        </div>
+    </div>
+
+    <div id="phase2" class="phase-container z-40 bg-slate-900 fade-blur-out" style="background-image: url('11.png'); background-size: cover; background-position: center;">
+        <div class="bg-overlay"></div>
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group px-4 text-center" onclick="goToPhase3()">
+            <img src="crystal.png" alt="Crystal" class="w-32 md:w-48 crystal-glow mb-8 rounded-t-full rounded-b-xl">
+            <h2 class="font-magic text-2xl md:text-3xl tracking-widest mb-3">YOU ARE INVITED</h2>
+            <p class="text-sm md:text-base font-light opacity-75 max-w-md">Cleanse The Crystal And Illuminate The Details</p>
+        </div>
+    </div>
+
+    <main id="phase3" class="hidden opacity-0" style="transition: opacity 1.5s ease, filter 1.5s ease; filter: blur(0.5px);">
+        
+        <section class="section-bg" style="background-image: url(12.png);">
+            
+            <div class="relative z-10 w-full max-w-3xl flex flex-col items-center gap-2 scroll-blur-element">
+                <img src="t1.png" alt="Top Text" class="h-10 md:h-12 object-contain">
+                <img src="logo2.png" alt="Main Title" class="w-1/2 md:w-1/3 object-contain">
+                <div class="flex flex-col gap-2 mt-2">
+                    <img src="t2.png" alt="Detail 1" class="h-8 md:h-10 object-contain">
+                    <img src="t3.png" alt="Detail 2" class="h-8 md:h-10 object-contain">
+                    <img src="t4.png" alt="Detail 3" class="h-8 md:h-10 object-contain">
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-[50vh] section-bg" style="background-image: url(13.png); padding: 2rem;">
+            <div class="bg-overlay opacity-80"></div>
+            <div class="relative z-10 flex flex-col items-center scroll-blur-element">
+                <h2 class="font-magic text-3xl md:text-4xl mb-8 tracking-wider text-blue-100">The Magic Begins In</h2>
+                
+                <div class="flex gap-3 md:gap-6 text-center">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="perspective-container bg-slate-900/60 backdrop-blur-md border border-slate-600 rounded-xl w-16 h-20 md:w-24 md:h-28 flex items-center justify-center shadow-2xl">
+                            <span id="box-days" class="font-magic text-3xl md:text-5xl font-bold text-white block">00</span>
+                        </div>
+                        <span class="text-[10px] md:text-xs tracking-[0.2em] text-slate-400">DAYS</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="perspective-container bg-slate-900/60 backdrop-blur-md border border-slate-600 rounded-xl w-16 h-20 md:w-24 md:h-28 flex items-center justify-center shadow-2xl">
+                            <span id="box-hours" class="font-magic text-3xl md:text-5xl font-bold text-white block">00</span>
+                        </div>
+                        <span class="text-[10px] md:text-xs tracking-[0.2em] text-slate-400">HOURS</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="perspective-container bg-slate-900/60 backdrop-blur-md border border-slate-600 rounded-xl w-16 h-20 md:w-24 md:h-28 flex items-center justify-center shadow-2xl">
+                            <span id="box-minutes" class="font-magic text-3xl md:text-5xl font-bold text-white block">00</span>
+                        </div>
+                        <span class="text-[10px] md:text-xs tracking-[0.2em] text-slate-400">MINS</span>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="perspective-container bg-slate-900/60 backdrop-blur-md border border-slate-600 rounded-xl w-16 h-20 md:w-24 md:h-28 flex items-center justify-center shadow-2xl">
+                            <span id="box-seconds" class="font-magic text-3xl md:text-5xl font-bold text-blue-300 block">00</span>
+                        </div>
+                        <span class="text-[10px] md:text-xs tracking-[0.2em] text-slate-400">SECS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-bg" style="background-image: url(12.png);">
+            <div class="relative z-10 w-full max-w-2xl scroll-blur-element">
+                <img src="14.png" alt="Programme" class="w-full object-contain ">
+            </div>
+        </section>
+
+        <section class="section-bg" style="background-image: url(15.png);">
+            <div class="bg-overlay opacity-90"></div>
+            <div class="relative z-10 w-full max-w-3xl scroll-blur-element">
+                <img src="16.1.png" alt="Melioran Meaning" class="w-full object-contain">
+            </div>
+        </section>
+
+        <section class="section-bg" style="background-image: url(17.png);">
+            <div class="bg-overlay opacity-80"></div>
+            <div class="relative z-10 w-full max-w-4xl scroll-blur-element">
+                <img src="18.1.png" alt="Awards List" class="w-full object-contain drop-shadow-lg">
+            </div>
+        </section>
+
+        <section class="min-h-[25vh] bg-slate-950 flex flex-col items-center justify-center p-8 border-y border-slate-800">
+            <div class="flex flex-col items-center scroll-blur-element">
+                <img src="19.png" alt="Motif Title" class="h-10 mb-8 object-contain">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                    <img src="c1.png" alt="Color 1" class="w-24 h-24 md:w-32 md:h-32 rounded-full shadow-lg border-2 border-slate-700">
+                    <img src="c2.png" alt="Color 2" class="w-24 h-24 md:w-32 md:h-32 rounded-full shadow-lg border-2 border-slate-700">
+                    <img src="c3.png" alt="Color 3" class="w-24 h-24 md:w-32 md:h-32 rounded-full shadow-lg border-2 border-slate-700">
+                    <img src="c4.png" alt="Color 4" class="w-24 h-24 md:w-32 md:h-32 rounded-full shadow-lg border-2 border-slate-700">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-bg" style="background-image: url(12.png);">
+            
+            <div class="relative z-10 w-full max-w-2xl flex flex-col items-center gap-8 scroll-blur-element">
+                <img src="20.png" alt="Closing Top" class="w-full object-contain">
+                <img src="21.png" alt="Closing Middle" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg shadow-2xl border border-slate-600">
+                <img src="22.png" alt="Closing Bottom" class="w-3/4 object-contain">
+            </div>
+        </section>
+
+        <section class="bg-slate-900 py-20 px-4 flex flex-col items-center border-t border-slate-800">
+            <div class="w-full max-w-md bg-slate-800/50 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-slate-700 scroll-blur-element">
+                <h2 id="rsvp-title" class="font-magic text-3xl text-center mb-6 tracking-widest cursor-default select-none">RSVP</h2>
+                
+                <div id="form-area">
+                    <form id="rsvp-form" class="space-y-5">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Name or Nickname</label>
+                            <input type="text" id="guestIdentifier" required placeholder="Coming?" class="w-full bg-slate-900 border border-slate-600 rounded p-3 text-white focus:outline-none focus:border-blue-400 transition-colors">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded tracking-wider uppercase transition-colors duration-300 border border-blue-700">
+                            Confirm Response
+                        </button>
+                    </form>
+                </div>
+
+                <div id="thank-you-state" class="hidden text-center py-8">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-900/50 text-green-400 rounded-full flex items-center justify-center text-3xl border border-green-700">✓</div>
+                    <h3 class="font-magic text-xl text-green-300 mb-2">Thank You</h3>
+                    <p class="text-slate-400 text-sm">Your presence has been crystalized to the list.</p>
+                </div>
+            </div>
+
+            <div id="admin-dashboard" class="hidden w-full max-w-2xl mt-12 bg-black/60 border border-amber-900 p-6 rounded-lg backdrop-blur-sm">
+                <div class="flex justify-between items-center border-b border-amber-900/50 pb-3 mb-4">
+                    <h3 class="font-magic text-amber-500 text-xl tracking-wider">Secret Admin Scroll</h3>
+                    <span class="text-xs text-amber-600/50 uppercase">Authorized Access</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs uppercase bg-slate-900/50 text-amber-500">
+                            <tr>
+                                <th class="px-4 py-3">Guest Identity</th>
+                                <th class="px-4 py-3 text-right">Time Responded</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-list" class="divide-y divide-slate-800">
+                            </tbody>
+                    </table>
+                    <p id="empty-state" class="text-slate-500 text-center py-4 hidden text-sm italic">No guests have responded yet.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="global-stationary-logo" class="hidden opacity-0" 
+     style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; pointer-events: none; transition: opacity 1.5s ease-in;">
+    
+    <div class="logo-float" style="pointer-events: auto;">
+        <img src="logo.png" 
+             alt="Global Icon" 
+             class="w-20 h-20 md:w-28 md:h-28 object-contain crystal-glow">
+    </div>
+</div>
+
+    <script>
+        /* --- Phase Transitions --- */
+        const p1 = document.getElementById('phase1');
+        const p2 = document.getElementById('phase2');
+        const p3 = document.getElementById('phase3');
+
+        function goToPhase2() {
+            p1.classList.add('fade-blur-out');
+            setTimeout(() => {
+                p1.style.display = 'none';
+                p2.classList.remove('fade-blur-out');
+                p2.classList.add('fade-blur-in');
+            }, 1000);
+        }
+
+        function goToPhase3() {
+            p2.classList.remove('fade-blur-in');
+            p2.classList.add('fade-blur-out');
+            
+            setTimeout(() => {
+                p2.style.display = 'none';
+                p3.classList.remove('hidden');
+                
+                // Grab the logo element
+                const logo = document.getElementById('global-stationary-logo');
+                logo.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    p3.style.opacity = '1';
+                    p3.style.filter = 'blur(0px)';
+                    logo.style.opacity = '1'; // Logo fades in smoothly
+                }, 50);
+            }, 1000);
+        }
+
+        /* --- 3D Flip Countdown Logic --- */
+        const targetDate = new Date('2026-03-09T16:00:00+08:00').getTime();
+        
+        let prevDays = -1, prevHours = -1, prevMins = -1, prevSecs = -1;
+
+        function updateUnit(id, currentValue, previousValue) {
+            if (currentValue !== previousValue) {
+                const element = document.getElementById(id);
+                element.innerText = currentValue.toString().padStart(2, '0');
+                
+                element.classList.remove('animate-flip');
+                void element.offsetWidth; // Force a DOM reflow to restart animation
+                element.classList.add('animate-flip');
+            }
+            return currentValue;
+        }
+
+        function tick() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('box-days').innerText = "00";
+                document.getElementById('box-hours').innerText = "00";
+                document.getElementById('box-minutes').innerText = "00";
+                document.getElementById('box-seconds').innerText = "00";
+                return;
+            }
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            prevDays = updateUnit('box-days', d, prevDays);
+            prevHours = updateUnit('box-hours', h, prevHours);
+            prevMins = updateUnit('box-minutes', m, prevMins);
+            prevSecs = updateUnit('box-seconds', s, prevSecs);
+        }
+        
+        setInterval(tick, 1000);
+        tick(); 
+
+        /* --- RSVP Form & Local Storage --- */
+        const form = document.getElementById('rsvp-form');
+        const formArea = document.getElementById('form-area');
+        const thankYou = document.getElementById('thank-you-state');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const identity = document.getElementById('guestIdentifier').value;
+
+            const guests = JSON.parse(localStorage.getItem('melioranGuestsV2') || '[]');
+            guests.push({ 
+                identity: identity, 
+                timestamp: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() 
+            });
+            localStorage.setItem('melioranGuestsV2', JSON.stringify(guests));
+
+            formArea.style.display = 'none';
+            thankYou.classList.remove('hidden');
+        });
+
+        /* --- Secret Admin Logic --- */
+        let rsvpClicks = 0;
+        let clickTimer;
+        const rsvpTitle = document.getElementById('rsvp-title');
+        
+        rsvpTitle.addEventListener('click', () => {
+            rsvpClicks++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { rsvpClicks = 0; }, 2000);
+
+            if (rsvpClicks === 5) {
+                rsvpClicks = 0; 
+                const pass = prompt("Enter Master Password to view the scroll:");
+                if (pass === "admin123") {
+                    renderAdminDashboard();
+                } else if (pass !== null) {
+                    alert("Incorrect incantation.");
+                }
+            }
+        });
+
+        function renderAdminDashboard() {
+            const dashboard = document.getElementById('admin-dashboard');
+            const listBody = document.getElementById('admin-list');
+            const emptyState = document.getElementById('empty-state');
+            
+            const guests = JSON.parse(localStorage.getItem('melioranGuestsV2') || '[]');
+            listBody.innerHTML = '';
+            
+            if (guests.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                guests.forEach(g => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-4 py-3 font-medium text-slate-200">${g.identity}</td>
+                        <td class="px-4 py-3 text-slate-400 text-right text-xs">${g.timestamp}</td>
+                    `;
+                    listBody.appendChild(row);
+                });
+            }
+            
+            dashboard.classList.remove('hidden');
+            setTimeout(() => {
+                dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        /* --- Scroll Animation Observer --- */
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scrolled-in');
+                    }
+                    // Optional: remove the class if you want the blur to repeat when scrolling back up
+                    // else { entry.target.classList.remove('scrolled-in'); }
+                });
+            }, observerOptions);
+
+            const blurElements = document.querySelectorAll('.scroll-blur-element');
+            blurElements.forEach(el => scrollObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
